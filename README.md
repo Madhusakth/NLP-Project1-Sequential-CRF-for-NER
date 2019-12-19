@@ -1,20 +1,26 @@
-# NLP-Project1-Sequential-CRF-for-NER
-Sequential CRF for NER
-Please refer to this readme to understand the naming conventions used. 
-geo_test_output_enc_dec_512.tsv: This is the simple encoder-decoder model with 512 hidden units and teacher forcing ratio set at 0.5. 
+To run the CRF model:
+Python3 ner.py —model CRF
+This command would run the general implementation with the features given in the reference code. 
 
-geo_test_output_enc_dec_512_linear.tsv: encoder-decoder model with 512 hidden units and linear decay scheduled sampling. 
+To run the model with the additional features, containing all the features: 
+- uncomment line 265 and comment line 264
+- uncomment line 331 and comment line 332
+- uncomment line 314 and comment line 315 and 316
+- uncomment line 428 and comment line 429
 
-geo_test_output_enc_dec_512_invsig.tsv: encoder-decoder model with 512 hidden units and inverse sigmoid decay scheduled sampling. 
 
-geo_test_output_enc_dec_512_expo.tsv: encoder-decoder model with 512 hidden units and exponential decay scheduled sampling. 
+To load a pre-trained weight and run only inference: 
+Uncomment line 347 and line 425
 
-geo_test_output_enc_dec_atten.tsv: Attention based encoder-decoder model with 512 hidden units and teacher forcing ratio set at 0.5.
+File names and the feature: 
+Eng.testb.out: Original CRF model
+Eng.testb_punc_pos_stop.out: Punctuation + POS cluster + Stop Word
+eng.testb_punc_stop.out: Punctuation + Stop Word
+Eng.testb_punc.out: Punctuation
+eng.testb_ngram.out: n-grams
+Eng.testb_CRF_all_features.out: Punctuation + POS cluster + Stop Word + TF-IDF
+eng.testb_all_features_ngram.out: Punctuation + POS cluster + Stop Word + TF-IDF + n-grams 
 
-geo_test_output_enc_dec_atten_invsig.tsv: Attention based encoder-decoder model with 512 hidden units and inverse sigmoid decay scheduled sampling. 
 
-geo_test_output_enc_dec_atten_expo.tsv: Attention based encoder-decoder model with 512 hidden units and exponential decay scheduled sampling. 
-
-geo_test_output_enc_dec_atten_linear.tsv: Attention based encoder-decoder model with 512 hidden units and linear decay scheduled sampling. 
-
-I have also included the training epochs and their result. The denotation is calculated only on the dev set and dev accuracy is calculated every alternate epoch while training. 
+File name for trained model weight: 
+Optimizer_weights_10epochs.npy: CRF model trained for 10 epochs with the original feature set
